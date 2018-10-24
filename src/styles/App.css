@@ -43,19 +43,29 @@
 .retro--blue {
   color: #006fe8;
   background-color: white;
-  box-shadow: 6px 6px 0px #006fe8;
+  box-shadow: 4px 4px 0px #006fe8;
   border: 1px solid #006fe8;
   font-family: monospace;
-  transition: 150ms ease-in-out;
+  position: relative;
+
+  top: 0px;
+  left: 0px;
+  transition: 50ms ease-in-out;
+}
+
+.retro--blue:active {
+  top: 2px;
+  left: 2px;
+  box-shadow: 2px 2px 0px #006fe8;
 }
 
 .retro--grey {
   color: #666666;
   background-color: white;
-  box-shadow: 6px 6px 0px #666666;
+  box-shadow: 4px 4px 0px #666666;
   border: 1px solid #666666;
   font-family: monospace;
-  transition: 150ms ease-in-out;
+  transition: 50ms ease-in-out;
 }
 
 .button {

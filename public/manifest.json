@@ -8,11 +8,13 @@
     "default_popup": "index.html",
     "default_title": "Swapperd"
   },
-  "permissions": [],
+  "permissions": ["activeTab", "declarativeContent", "storage", "tabs"],
+  "content_scripts": [{
+    "matches": ["http://*/*", "https://*/*"],
+    "js": ["contentscript.js"]
+  }],
   "background": {
     "scripts": ["background.js"],
-    "persistent": false
-  },
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+    "persistent": true
+  }
 }

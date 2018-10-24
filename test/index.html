@@ -1,0 +1,32 @@
+<html>
+
+<body>
+
+    <input type="number" id="btcCount"># of BTC</button>
+    <button id="theButton">Buy ETH with BTC</button>
+    <script>
+        document.getElementById("theButton").addEventListener("click",
+            function () {
+                window.postMessage({
+                    method: "requestSwap",
+                    swapDetails: {
+                        sendToken: "BTC",
+                        receiveToken: "ETH",
+
+                        // SendAmount and ReceiveAmount are hex encoded.
+                        sendAmount: document.getElementById('btcCount').value,
+                        receiveAmount: document.getElementById('btcCount').value,
+
+                        sendTo: "0x000",
+                        receiveFrom: "0x000",
+                        timeLock: "1000",
+                        secretHash: "1000",
+                        shouldInitiateFirst: "1000",
+                    }
+                }, "*");
+                console.log("Sent swap request!");
+            }, false);
+    </script>
+</body>
+
+</html>
