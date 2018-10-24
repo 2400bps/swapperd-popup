@@ -8,8 +8,11 @@
     "default_popup": "index.html",
     "default_title": "Swapperd"
   },
-  "permissions": [
-  ],
+  "permissions": [],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
   "theme_color": "#000000",
   "background_color": "#ffffff"
 }
