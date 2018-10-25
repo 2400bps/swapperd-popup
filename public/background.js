@@ -1,6 +1,7 @@
 let swapDetails = null;
 
 let popup = null;
+let tabID = null;
 
 const refreshBadge = () => {
     chrome.browserAction.setBadgeBackgroundColor({
@@ -23,11 +24,41 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         popup = null;
         swapDetails = null;
         refreshBadge();
+
+        chrome.tabs.sendMessage(tabID, {
+            ok: true,
+            message: "Swap request approved",
+            data: request.response,
+        }, function (response) {
+            // console.log(response);
+        });
+        tabID = null;
+    } else if (request.method === "rejectedSwap") {
+        popup.close();
+        popup = null;
+        swapDetails = null;
+        refreshBadge();
+        chrome.tabs.sendMessage(tabID, {
+            ok: false,
+            message: "Swap request approved",
+        }, function (response) {
+            // console.log(response);
+        });
+        tabID = null;
     } else if (request.method === "requestSwap") {
+        if (swapDetails || popup || tabID) {
+            sendResponse({
+                ok: false,
+                message: "Swap request already initialized",
+            })
+        }
+
+
         swapDetails = request.swapDetails;
 
-        popup = window.open('index.html', 'Approve Swap', 'width=640,height=480,location=no,scrollbars=yes');
+        popup = window.open('index.html', 'Approve Swap', 'width=380,height=520,location=no,scrollbars=yes');
         let timer = setInterval(function () {
+
             if (!popup || popup.closed) {
                 clearInterval(timer);
 
@@ -39,6 +70,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
         refreshBadge();
 
-        sendResponse();
+        tabID = sender.tab.id;
     }
 });

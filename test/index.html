@@ -2,30 +2,40 @@
 
 <body>
 
-    <input type="number" id="btcCount"># of BTC</button>
-    <button id="theButton">Buy ETH with BTC</button>
+    <form onsubmit="onsubmit()">
+        <p># of BTC</p>
+        <input type="number" id="btcCount" />
+        <p>Recipient's BTC address</p>
+        <input type="string" id="btcAddress" />
+        <p>Recipient's ETH address</p>
+        <input type="string" id="ethAddress" />
+        <p><button type="submit">Buy ETH with BTC</button></p>
+    </form>
+    <p id="result"></p>
     <script>
-        document.getElementById("theButton").addEventListener("click",
-            function () {
-                window.postMessage({
-                    method: "requestSwap",
-                    swapDetails: {
-                        sendToken: "BTC",
-                        receiveToken: "ETH",
+        window.addEventListener("message", function (message) {
+            console.log(message);
+        }, false);
 
-                        // SendAmount and ReceiveAmount are hex encoded.
-                        sendAmount: document.getElementById('btcCount').value,
-                        receiveAmount: document.getElementById('btcCount').value,
+        function onsubmit() {
+            window.postMessage({
+                method: "requestSwap",
+                swapDetails: {
+                    sendToken: "BTC",
+                    receiveToken: "ETH",
 
-                        sendTo: "0x000",
-                        receiveFrom: "0x000",
-                        timeLock: "1000",
-                        secretHash: "1000",
-                        shouldInitiateFirst: "1000",
-                    }
-                }, "*");
-                console.log("Sent swap request!");
-            }, false);
+                    // SendAmount and ReceiveAmount are hex encoded.
+                    sendAmount: document.getElementById('btcCount').value,
+                    receiveAmount: document.getElementById('btcCount').value,
+
+                    sendTo: "0x000",
+                    receiveFrom: "0x000",
+                    timeLock: "1000",
+                    secretHash: "1000",
+                    shouldInitiateFirst: "1000",
+                }
+            }, "*");
+        }
     </script>
 </body>
 

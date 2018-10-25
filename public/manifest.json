@@ -10,7 +10,7 @@
   },
   "permissions": ["activeTab", "declarativeContent", "storage", "tabs"],
   "content_scripts": [{
-    "matches": ["http://*/*", "https://*/*"],
+    "matches": ["file:///*/*", "http://*/*", "https://*/*"],
     "js": ["contentscript.js"]
   }],
   "background": {

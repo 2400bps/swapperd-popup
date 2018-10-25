@@ -7,10 +7,12 @@
       "coverage/lcov-report/*.js"
     ]
   },
-  "rules": {
-    "no-console": false //Disable for typescript
+  "rules": { // Disable for typescript
+    "no-console": false,
+    "object-literal-sort-keys": false
   },
-  "jsRules": {
-    "no-console": false //Disable for javascript
+  "jsRules": { // Disable for javascript
+    "no-console": false,
+    "object-literal-sort-keys": false
   }
 }

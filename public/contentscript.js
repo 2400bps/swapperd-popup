@@ -4,12 +4,13 @@ window.addEventListener("message", function (event) {
         return;
     }
 
-    if (event.data.method && (event.data.method === "requestSwap")) {
-        chrome.extension.sendMessage({
-            method: event.data.method,
-            swapDetails: event.data.swapDetails,
-        }, function (response) {
-            //
+    if (event && event.data) {
+        chrome.extension.sendMessage(event.data, function (response) {
+            // console.log(`Got response contentscript.js: ${JSON.stringify(response)}`);
+            window.postMessage(response, "*");
         });
     }
+
+    // console.log(`Got message in contentscript.js: ${JSON.stringify(event)}`);
+
 }, false);

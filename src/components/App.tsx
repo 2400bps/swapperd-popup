@@ -1,13 +1,16 @@
 import * as React from 'react';
 
-// import axios from 'axios';
-
 import '../styles/App.css';
 
 import ApproveSwap from './ApproveSwap';
 
-export interface IPartialSwapRequest {
+export interface ISwapRequest extends IPartialSwapRequest {
     id: string,
+    timeLock: number,
+    secretHash: string,
+}
+
+export interface IPartialSwapRequest {
     sendToken: string,
     receiveToken: string,
 
@@ -17,8 +20,6 @@ export interface IPartialSwapRequest {
 
     sendTo: string,
     receiveFrom: string,
-    timeLock: number,
-    secretHash: string,
     shouldInitiateFirst: boolean,
 }
 
@@ -49,23 +50,10 @@ class App extends React.Component<{}, IAppState> {
                     <div>
                         <h1>Listening for swaps...</h1>
                     </div> :
-                    <ApproveSwap swapDetails={swapDetails} onAccept={this.onAccept} />
+                    <ApproveSwap swapDetails={swapDetails} />
                 }
             </div>
         );
-    }
-
-    private onAccept() {
-        chrome.runtime.sendMessage({ method: 'approvedSwap' }, console.log);
-
-        // chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        //     chrome.tabs.executeScript(
-        //         tabs[0].id || 0,
-        //         { code: 'Atomic swap complete!' });
-        // });
-        // axios.post("http://localhost:18516/swaps", {
-
-        // });
     }
 }
 
