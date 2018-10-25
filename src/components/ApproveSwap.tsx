@@ -75,13 +75,13 @@ class ApproveSwap extends React.Component<IApproveSwapProps, IApproveSwapState> 
                                 <div className="swap-header--row">
                                     <img className="swap-header--row-img" src={getLogo(swapDetails.sendToken)} />
                                     <div className="swap-header--row-body">
-                                        <div className="swap-header--row-title">Send</div><div>{new BigNumber(swapDetails.sendAmount, 16).dividedBy(100000000).toString()} {swapDetails.sendToken}</div>
+                                        <div className="swap-header--row-title">Send</div><div>{new BigNumber(swapDetails.sendAmount).dividedBy(100000000).toString()} {swapDetails.sendToken}</div>
                                     </div>
                                 </div>
                                 <div className="swap-header--row">
                                     <img className="swap-header--row-img" src={getLogo(swapDetails.receiveToken)} />
                                     <div className="swap-header--row-body">
-                                        <div className="swap-header--row-title">Receive</div><div>{new BigNumber(swapDetails.receiveAmount, 16).dividedBy(100000000).toString()} {swapDetails.receiveToken}</div>
+                                        <div className="swap-header--row-title">Receive</div><div>{new BigNumber(swapDetails.receiveAmount).dividedBy(100000000).toString()} {swapDetails.receiveToken}</div>
                                     </div>
                                 </div>
                             </div>
